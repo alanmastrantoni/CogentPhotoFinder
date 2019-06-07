@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DuplicateImageFinder.Core.Dto
+﻿namespace DuplicateImageFinder.Core.Dto
 {
     public class FileInfoWithHash
     {

@@ -26,7 +26,6 @@ namespace DuplicateImageFinderTests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(DirectoryNotFoundException))]
         public void ImageRepositoryWithValidPathReturnsImages()
         {
             IFileRepository fileRepository = new ImageRepository();
