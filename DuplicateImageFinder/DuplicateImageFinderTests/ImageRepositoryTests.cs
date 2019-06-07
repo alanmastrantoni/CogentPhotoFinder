@@ -29,7 +29,7 @@ namespace DuplicateImageFinderTests
         public void ImageRepositoryWithValidPathReturnsImages()
         {
             IFileRepository fileRepository = new ImageRepository();
-            var images = fileRepository.GetFiles(@".\Code Test");
+            var images = fileRepository.GetFiles(@"..\..\..\Code Test");
             Assert.IsTrue(images.Count == 52);
         }
     }
