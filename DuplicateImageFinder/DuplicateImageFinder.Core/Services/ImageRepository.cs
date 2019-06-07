@@ -9,6 +9,13 @@ namespace DuplicateImageFinder.Core.Services
 {
     public class ImageRepository : IFileRepository
     {
+        private IFileHashProvider HashProvider { get; set; }
+        public ImageRepository(IFileHashProvider hashProvider)
+        {
+            HashProvider = hashProvider;
+        }
+
+        private readonly string[] extensions = { ".jpg", ".bmp", ".png", ".gif" };
         public List<FileInfoWithHash> GetFiles(string path)
         {
             if (string.IsNullOrEmpty(path))
@@ -18,12 +25,11 @@ namespace DuplicateImageFinder.Core.Services
                 throw new DirectoryNotFoundException("Directory provided does not exist");
 
             var result = new List<FileInfoWithHash>();
-            string[] extensions = { ".jpg", ".bmp", ".png", ".gif" };
-
+           
             foreach (string file in Directory.EnumerateFiles(path, "*.*", SearchOption.AllDirectories)
                 .Where(s => extensions.Any(ext => ext == Path.GetExtension(s))))
             {
-                result.Add(new FileInfoWithHash(file, string.Empty));
+                result.Add(new FileInfoWithHash(file, HashProvider.GetFileHash(file)));
             }
             return result;
         }

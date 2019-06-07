@@ -1,6 +1,7 @@
 using DuplicateImageFinder.Core.Interfaces;
 using DuplicateImageFinder.Core.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using System;
 using System.IO;
 
@@ -13,7 +14,8 @@ namespace DuplicateImageFinderTests
         [ExpectedException(typeof(ArgumentException))]
         public void ImageRepositoryWithEmptyPathReturnsError()
         {
-            IFileRepository fileRepository = new ImageRepository();
+            Mock<IFileHashProvider> fileHashMock = new Mock<IFileHashProvider>();
+            IFileRepository fileRepository = new ImageRepository(fileHashMock.Object);
             fileRepository.GetFiles(string.Empty);
         }
 
@@ -21,14 +23,19 @@ namespace DuplicateImageFinderTests
         [ExpectedException(typeof(DirectoryNotFoundException))]
         public void ImageRepositoryWithInvalidPathReturnsError()
         {
-            IFileRepository fileRepository = new ImageRepository();
+            Mock<IFileHashProvider> fileHashMock = new Mock<IFileHashProvider>();
+            IFileRepository fileRepository = new ImageRepository(fileHashMock.Object);
             fileRepository.GetFiles("ass@fff");
         }
 
         [TestMethod]
         public void ImageRepositoryWithValidPathReturnsImages()
         {
-            IFileRepository fileRepository = new ImageRepository();
+            Mock<IFileHashProvider> fileHashMock = new Mock<IFileHashProvider>();
+            fileHashMock.Setup(m => m.GetFileHash(It.IsAny<string>()))
+                .Returns("123");
+            
+            IFileRepository fileRepository = new ImageRepository(fileHashMock.Object);
             var images = fileRepository.GetFiles(@"..\..\..\Code Test");
             Assert.IsTrue(images.Count == 52);
         }

@@ -29,7 +29,7 @@ namespace DuplicateImageFinderTests
         public void FileHashWithValidFileReturnsHash()
         {
             IFileHashProvider hashProvider = new FileHashProvider();
-            var contentHash = fileRepository.GetFiles(@"..\..\..\Code Test\mew.jpg");
+            var contentHash = hashProvider.GetFileHash(@"..\..\..\Code Test\mew.jpg");
             Assert.IsNotNull(contentHash);
         }
     }
