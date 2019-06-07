@@ -1,5 +1,5 @@
 using DuplicateImageFinder.Core.Interfaces;
-using DuplicateImageFinder.Core.Services;
+using DuplicateImageFinder.Core.Repository;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
