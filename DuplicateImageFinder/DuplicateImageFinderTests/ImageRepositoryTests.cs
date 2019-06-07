@@ -37,7 +37,7 @@ namespace DuplicateImageFinderTests
             
             IFileRepository fileRepository = new ImageRepository(fileHashMock.Object);
             var images = fileRepository.GetFiles(@"..\..\..\Code Test");
-            Assert.IsTrue(images.Count == 52);
+            Assert.IsTrue(images.Count == 3);
         }
     }
 }
