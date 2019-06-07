@@ -4,7 +4,15 @@ using System.Text;
 
 namespace DuplicateImageFinder.Core.Dto
 {
-    class FileInfoWithHash
+    public class FileInfoWithHash
     {
+        public string FullFileName {get; private set;}
+        public string ContentHash { get; private set; }
+
+        public FileInfoWithHash(string fullFileName, string contentHash)
+        {
+            FullFileName = fullFileName;
+            ContentHash = contentHash;
+        }
     }
 }

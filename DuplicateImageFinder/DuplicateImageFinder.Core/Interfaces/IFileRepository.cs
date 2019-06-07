@@ -1,10 +1,10 @@
-﻿using System;
+﻿using DuplicateImageFinder.Core.Dto;
 using System.Collections.Generic;
-using System.Text;
 
 namespace DuplicateImageFinder.Core.Interfaces
 {
-    interface IFileRepository
+    public interface IFileRepository
     {
+        List<FileInfoWithHash> GetFiles(string path);
     }
 }
