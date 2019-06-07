@@ -27,7 +27,7 @@ namespace DuplicateImageFinderTests
             var fileList = new List<FileInfoWithHash>();
             fileList.Add(new FileInfoWithHash("test1", "test1" ));
             fileList.Add(new FileInfoWithHash("test2", "test2"));
-            Mock<IFileRepository> fileRepositoryMock = new Mock<IFileRepository>(fileHashMock.Object);
+            Mock<IFileRepository> fileRepositoryMock = new Mock<IFileRepository>();
             fileRepositoryMock.Setup(m => m.GetFiles(It.IsAny<string>()))
                 .Returns(fileList);
 
@@ -44,7 +44,7 @@ namespace DuplicateImageFinderTests
             fileList.Add(new FileInfoWithHash("test1", "test1"));
             fileList.Add(new FileInfoWithHash("test1", "test1"));
             fileList.Add(new FileInfoWithHash("test2", "test2"));
-            Mock<IFileRepository> fileRepositoryMock = new Mock<IFileRepository>(fileHashMock.Object);
+            Mock<IFileRepository> fileRepositoryMock = new Mock<IFileRepository>();
             fileRepositoryMock.Setup(m => m.GetFiles(It.IsAny<string>()))
                 .Returns(fileList);
 
@@ -63,7 +63,7 @@ namespace DuplicateImageFinderTests
             fileList.Add(new FileInfoWithHash("test1", "test1"));
             fileList.Add(new FileInfoWithHash("test2", "test2"));
             fileList.Add(new FileInfoWithHash("test1", "test1"));
-            Mock<IFileRepository> fileRepositoryMock = new Mock<IFileRepository>(fileHashMock.Object);
+            Mock<IFileRepository> fileRepositoryMock = new Mock<IFileRepository>();
             fileRepositoryMock.Setup(m => m.GetFiles(It.IsAny<string>()))
                 .Returns(fileList);
             IDuplicateFileFinder duplicateFileFinder = new DuplicateFileFinder(fileRepositoryMock.Object);
@@ -82,12 +82,12 @@ namespace DuplicateImageFinderTests
             fileList.Add(new FileInfoWithHash("test3", "test3"));
             fileList.Add(new FileInfoWithHash("test1", "test1"));
             fileList.Add(new FileInfoWithHash("test3", "test3"));
-            Mock<IFileRepository> fileRepositoryMock = new Mock<IFileRepository>(fileHashMock.Object);
+            Mock<IFileRepository> fileRepositoryMock = new Mock<IFileRepository>();
             fileRepositoryMock.Setup(m => m.GetFiles(It.IsAny<string>()))
                 .Returns(fileList);
             IDuplicateFileFinder duplicateFileFinder = new DuplicateFileFinder(fileRepositoryMock.Object);
             var duplicates = duplicateFileFinder.FindDuplicates(@".\");
-            Assert.IsTrue(duplicates.Count == 4);
+            Assert.IsTrue(duplicates.Count == 5);
         }
     }
 }
